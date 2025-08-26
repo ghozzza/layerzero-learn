@@ -22,6 +22,6 @@ contract MyOFTIDRX is ERC20, Ownable {
     }
 
     function decimals() public pure override returns (uint8) {
-        return 6;
+        return 2;
     }
 }

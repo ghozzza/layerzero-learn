@@ -36,6 +36,7 @@ contract DeployOFT is Script, Helper {
         vm.stopBroadcast();
     }
 }
+// PASS TO -> CHAIN_IDRX || CHAIN_USDT
 //   deployed on ChainId:  421614
 //   USDT deployed on Address:  0x9850120Abfa32efc9E345583Bc22A70C07cCC2c9
 //   IDRX deployed on Address:  0xd4221928D1bA8881560da1a528b8495248c5bE46
@@ -44,3 +45,9 @@ contract DeployOFT is Script, Helper {
 //   IDRX deployed on Address:  0x47E64F8615718d1A3FA34efe7E7b96aA9ac8B7F4
 // RUN
 // forge script DeployOFT --broadcast -vvv --verify
+
+// verify
+// 0x47E64F8615718d1A3FA34efe7E7b96aA9ac8B7F4
+
+// forge verify-contract 0x47E64F8615718d1A3FA34efe7E7b96aA9ac8B7F4 src/MyOFTIDRX.sol:MyOFTIDRX --chain-id 84532 --etherscan-api-key 285CY8ZFXPCHJA8VEEVHH3HPAHF59D6R1J
+// forge verify-contract 0xd4221928D1bA8881560da1a528b8495248c5bE46 src/MyOFTIDRX.sol:MyOFTIDRX --chain-id 421614 --verifier etherscan --etherscan-api-key 285CY8ZFXPCHJA8VEEVHH3HPAHF59D6R1J

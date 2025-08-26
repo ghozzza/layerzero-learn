@@ -8,6 +8,7 @@ import {OptionsBuilder} from "@layerzerolabs/oapp-evm/contracts/oapp/libs/Option
 import {MessagingFee} from "@layerzerolabs/oapp-evm/contracts/oapp/OApp.sol";
 import {Helper} from "./Helper.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 
 contract SendOFT is Script, Helper {
     using OptionsBuilder for bytes;
@@ -24,7 +25,7 @@ contract SendOFT is Script, Helper {
         // Load environment variables
         address oftAddress = BASE_OAPP;
         address toAddress = vm.envAddress("TESTNET_PUBLIC_KEY");
-        uint256 tokensToSend = 1_000e6;
+        uint256 tokensToSend = 1_000 * 10 ** IERC20Metadata(BASE_IDRX).decimals();
         uint32 dstEid = ARB_EID;
         uint256 privateKey = vm.envUint("TESTNET_PRIVATE_KEY");
 
