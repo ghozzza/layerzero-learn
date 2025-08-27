@@ -14,7 +14,7 @@ contract SendOFT is Script, Helper {
     using OptionsBuilder for bytes;
 
     function setUp() public {
-        vm.createSelectFork(vm.rpcUrl("base_sepolia"));
+        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
     }
 
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
@@ -24,10 +24,14 @@ contract SendOFT is Script, Helper {
     function run() external {
         // Load environment variables
         address oftAddress = BASE_OAPP;
-        address toAddress = vm.envAddress("TESTNET_PUBLIC_KEY");
+        address toAddress = vm.envAddress("PUBLIC_KEY");
+        //** AMOUNT TO SEND
         uint256 tokensToSend = 1_000 * 10 ** IERC20Metadata(BASE_IDRX).decimals();
+        //************
+        //** DESTINATION
         uint32 dstEid = ARB_EID;
-        uint256 privateKey = vm.envUint("TESTNET_PRIVATE_KEY");
+        //************
+        uint256 privateKey = vm.envUint("PRIVATE_KEY");
 
         vm.startBroadcast(privateKey);
 

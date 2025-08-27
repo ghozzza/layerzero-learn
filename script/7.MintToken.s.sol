@@ -8,19 +8,19 @@ import {Helper} from "./Helper.sol";
 
 contract MintToken is Script, Helper {
     function setUp() public {
-        vm.createSelectFork(vm.rpcUrl("base_sepolia"));
+        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
     }
 
     function run() public {
-        vm.startBroadcast(vm.envUint("TESTNET_PRIVATE_KEY"));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         // balance before mint
-        console.log("balance before mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("TESTNET_PUBLIC_KEY")));
-        console.log("balance before mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("TESTNET_PUBLIC_KEY")));
-        MyOFT(BASE_USDT).mint(vm.envAddress("TESTNET_PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_USDT).decimals());
-        MyOFT(BASE_IDRX).mint(vm.envAddress("TESTNET_PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_IDRX).decimals());
+        console.log("balance before mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("PUBLIC_KEY")));
+        console.log("balance before mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("PUBLIC_KEY")));
+        MyOFT(BASE_USDT).mint(vm.envAddress("PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_USDT).decimals());
+        MyOFT(BASE_IDRX).mint(vm.envAddress("PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_IDRX).decimals());
         // balance after mint
-        console.log("balance after mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("TESTNET_PUBLIC_KEY")));
-        console.log("balance after mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("TESTNET_PUBLIC_KEY")));
+        console.log("balance after mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("PUBLIC_KEY")));
+        console.log("balance after mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("PUBLIC_KEY")));
         vm.stopBroadcast();
     }
 }

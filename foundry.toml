@@ -15,6 +15,10 @@ remappings = [
 arb_sepolia = "https://sepolia-rollup.arbitrum.io/rpc"
 base_sepolia= "https://sepolia.base.org"
 arb_mainnet = "https://arbitrum.drpc.org"
+base_mainnet = "https://base.drpc.org"
+bsc_mainnet = "https://bsc.drpc.org"
+kaia_mainnet = "https://klaytn.drpc.org"
+pol_mainnet = "https://polygon.drpc.org"
 
 [lint]
 exclude_lints = ["mixed-case-variable", "mixed-case-function"]

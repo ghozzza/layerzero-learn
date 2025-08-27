@@ -31,27 +31,62 @@ contract SetSendConfig is Script, Helper {
 
     /// @notice Broadcasts transactions to set both Send ULN and Executor configurations for messages sent from Chain A to Chain B
     function run() external {
-        address endpoint;
-        address oapp;
-        uint32 eid;
-        address sendLib;
-        UlnConfig memory uln;
-        ExecutorConfig memory exec;
-        bytes memory encodedUln;
-        bytes memory encodedExec;
-        SetConfigParam[] memory params;
-        SetConfigParam[] memory params2;
+        deployBASE();
+        // deployARB();
+        // deployKAIA();
+        // deployPOL();
+        // deployBSC();
+    }
 
-        vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
-        endpoint = ARB_LZ_ENDPOINT; // Chain A Endpoint
-        oapp = ARB_OAPP; // OApp on Chain A
-        eid = ARB_EID; // Endpoint ID for Chain B
-        sendLib = ARB_SEND_LIB; // SendLib for A → B
+    function deployBASE() public {
+        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
+        address endpoint = BASE_LZ_ENDPOINT; // Chain A Endpoint
+        address oapp = BASE_OAPP; // OApp on Chain A
+        uint32 eid = BASE_EID; // Endpoint ID for Chain B
+        address sendLib = BASE_SEND_LIB; // SendLib for A → B
         /// @notice ULNConfig defines security parameters (DVNs + confirmation threshold) for A → B
         /// @notice Send config requests these settings to be applied to the DVNs and Executor for messages sent from A to B
         /// @dev 0 values will be interpretted as defaults, so to apply NIL settings, use:
         /// @dev uint8 internal constant NIL_DVN_COUNT = type(uint8).max;
         /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
+        UlnConfig memory uln;
+        uln = UlnConfig({
+            confirmations: 15, // minimum block confirmations required on A before sending to B
+            requiredDVNCount: 2, // number of DVNs required
+            optionalDVNCount: type(uint8).max, // optional DVNs count, uint8
+            optionalDVNThreshold: 0, // optional DVN threshold
+            requiredDVNs: _toDynamicArray([BASE_DVN1, BASE_DVN2]), // sorted list of required DVN addresses
+            optionalDVNs: new address[](0) // sorted list of optional DVNs
+        });
+        /// @notice ExecutorConfig sets message size limit + fee‑paying executor for A → B
+        ExecutorConfig memory exec;
+        exec = ExecutorConfig({
+            maxMessageSize: 10000, // max bytes per cross-chain message
+            executor: BASE_EXECUTOR // address that pays destination execution fees on B
+        });
+        bytes memory encodedUln = abi.encode(uln);
+        bytes memory encodedExec = abi.encode(exec);
+        SetConfigParam[] memory params;
+        params = new SetConfigParam[](2);
+        params[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
+        params[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params); // Set config for messages sent from A to B
+        vm.stopBroadcast();
+    }
+
+    function deployARB() public {
+        vm.createSelectFork(vm.rpcUrl("arb_mainnet"));
+        address endpoint = ARB_LZ_ENDPOINT; // Chain A Endpoint
+        address oapp = ARB_OAPP; // OApp on Chain A
+        uint32 eid = ARB_EID; // Endpoint ID for Chain B
+        address sendLib = ARB_SEND_LIB; // SendLib for A → B
+        /// @notice ULNConfig defines security parameters (DVNs + confirmation threshold) for A → B
+        /// @notice Send config requests these settings to be applied to the DVNs and Executor for messages sent from A to B
+        /// @dev 0 values will be interpretted as defaults, so to apply NIL settings, use:
+        /// @dev uint8 internal constant NIL_DVN_COUNT = type(uint8).max;
+        /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
+        UlnConfig memory uln;
         uln = UlnConfig({
             confirmations: 15, // minimum block confirmations required on A before sending to B
             requiredDVNCount: 2, // number of DVNs required
@@ -61,57 +96,130 @@ contract SetSendConfig is Script, Helper {
             optionalDVNs: new address[](0) // sorted list of optional DVNs
         });
         /// @notice ExecutorConfig sets message size limit + fee‑paying executor for A → B
+        ExecutorConfig memory exec;
         exec = ExecutorConfig({
             maxMessageSize: 10000, // max bytes per cross-chain message
             executor: ARB_EXECUTOR // address that pays destination execution fees on B
         });
-        encodedUln = abi.encode(uln);
-        encodedExec = abi.encode(exec);
+        bytes memory encodedUln = abi.encode(uln);
+        bytes memory encodedExec = abi.encode(exec);
+        SetConfigParam[] memory params;
         params = new SetConfigParam[](2);
         params[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
         params[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
-        vm.startBroadcast(vm.envUint("TESTNET_PRIVATE_KEY"));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params); // Set config for messages sent from A to B
         vm.stopBroadcast();
+    }
 
-        console.log("============================================================================================");
-        console.log("============================================================================================");
-
-        vm.createSelectFork(vm.rpcUrl("base_sepolia"));
-        endpoint = BASE_LZ_ENDPOINT; // Chain A Endpoint
-        oapp = BASE_OAPP; // OApp on Chain A
-        eid = BASE_EID; // Endpoint ID for Chain B
-        sendLib = BASE_SEND_LIB; // SendLib for A → B
-
+    function deployKAIA() public {
+        vm.createSelectFork(vm.rpcUrl("kaia_mainnet"));
+        address endpoint = KAIA_LZ_ENDPOINT; // Chain A Endpoint
+        address oapp = KAIA_OAPP; // OApp on Chain A
+        uint32 eid = KAIA_EID; // Endpoint ID for Chain B
+        address sendLib = KAIA_SEND_LIB; // SendLib for A → B
         /// @notice ULNConfig defines security parameters (DVNs + confirmation threshold) for A → B
         /// @notice Send config requests these settings to be applied to the DVNs and Executor for messages sent from A to B
         /// @dev 0 values will be interpretted as defaults, so to apply NIL settings, use:
         /// @dev uint8 internal constant NIL_DVN_COUNT = type(uint8).max;
         /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
+        UlnConfig memory uln;
         uln = UlnConfig({
             confirmations: 15, // minimum block confirmations required on A before sending to B
             requiredDVNCount: 2, // number of DVNs required
             optionalDVNCount: type(uint8).max, // optional DVNs count, uint8
             optionalDVNThreshold: 0, // optional DVN threshold
-            requiredDVNs: _toDynamicArray([BASE_DVN1, BASE_DVN2]), // sorted list of required DVN addresses
+            requiredDVNs: _toDynamicArray([KAIA_DVN1, KAIA_DVN2]), // sorted list of required DVN addresses
             optionalDVNs: new address[](0) // sorted list of optional DVNs
         });
-
         /// @notice ExecutorConfig sets message size limit + fee‑paying executor for A → B
+        ExecutorConfig memory exec;
         exec = ExecutorConfig({
             maxMessageSize: 10000, // max bytes per cross-chain message
-            executor: BASE_EXECUTOR // address that pays destination execution fees on B
+            executor: KAIA_EXECUTOR // address that pays destination execution fees on B
         });
+        bytes memory encodedUln = abi.encode(uln);
+        bytes memory encodedExec = abi.encode(exec);
+        SetConfigParam[] memory params;
+        params = new SetConfigParam[](2);
+        params[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
+        params[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params); // Set config for messages sent from A to B
+        vm.stopBroadcast();
+    }
 
-        encodedUln = abi.encode(uln);
-        encodedExec = abi.encode(exec);
+    function deployPOL() public {
+        vm.createSelectFork(vm.rpcUrl("pol_mainnet"));
+        address endpoint = POL_LZ_ENDPOINT; // Chain A Endpoint
+        address oapp = POL_OAPP; // OApp on Chain A
+        uint32 eid = POL_EID; // Endpoint ID for Chain B
+        address sendLib = POL_SEND_LIB; // SendLib for A → B
+        /// @notice ULNConfig defines security parameters (DVNs + confirmation threshold) for A → B
+        /// @notice Send config requests these settings to be applied to the DVNs and Executor for messages sent from A to B
+        /// @dev 0 values will be interpretted as defaults, so to apply NIL settings, use:
+        /// @dev uint8 internal constant NIL_DVN_COUNT = type(uint8).max;
+        /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
+        UlnConfig memory uln;
+        uln = UlnConfig({
+            confirmations: 15, // minimum block confirmations required on A before sending to B
+            requiredDVNCount: 2, // number of DVNs required
+            optionalDVNCount: type(uint8).max, // optional DVNs count, uint8
+            optionalDVNThreshold: 0, // optional DVN threshold
+            requiredDVNs: _toDynamicArray([POL_DVN1, POL_DVN2]), // sorted list of required DVN addresses
+            optionalDVNs: new address[](0) // sorted list of optional DVNs
+        });
+        /// @notice ExecutorConfig sets message size limit + fee‑paying executor for A → B
+        ExecutorConfig memory exec;
+        exec = ExecutorConfig({
+            maxMessageSize: 10000, // max bytes per cross-chain message
+            executor: POL_EXECUTOR // address that pays destination execution fees on B
+        });
+        bytes memory encodedUln = abi.encode(uln);
+        bytes memory encodedExec = abi.encode(exec);
+        SetConfigParam[] memory params;
+        params = new SetConfigParam[](2);
+        params[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
+        params[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params); // Set config for messages sent from A to B
+        vm.stopBroadcast();
+    }
 
-        params2 = new SetConfigParam[](2);
-        params2[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
-        params2[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
-
-        vm.startBroadcast(vm.envUint("TESTNET_PRIVATE_KEY"));
-        ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params2); // Set config for messages sent from A to B
+    function deployBSC() public {
+        vm.createSelectFork(vm.rpcUrl("bsc_mainnet"));
+        address endpoint = BSC_LZ_ENDPOINT; // Chain A Endpoint
+        address oapp = BSC_OAPP; // OApp on Chain A
+        uint32 eid = BSC_EID; // Endpoint ID for Chain B
+        address sendLib = BSC_SEND_LIB; // SendLib for A → B
+        /// @notice ULNConfig defines security parameters (DVNs + confirmation threshold) for A → B
+        /// @notice Send config requests these settings to be applied to the DVNs and Executor for messages sent from A to B
+        /// @dev 0 values will be interpretted as defaults, so to apply NIL settings, use:
+        /// @dev uint8 internal constant NIL_DVN_COUNT = type(uint8).max;
+        /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
+        UlnConfig memory uln;
+        uln = UlnConfig({
+            confirmations: 15, // minimum block confirmations required on A before sending to B
+            requiredDVNCount: 2, // number of DVNs required
+            optionalDVNCount: type(uint8).max, // optional DVNs count, uint8
+            optionalDVNThreshold: 0, // optional DVN threshold
+            requiredDVNs: _toDynamicArray([BSC_DVN1, BSC_DVN2]), // sorted list of required DVN addresses
+            optionalDVNs: new address[](0) // sorted list of optional DVNs
+        });
+        /// @notice ExecutorConfig sets message size limit + fee‑paying executor for A → B
+        ExecutorConfig memory exec;
+        exec = ExecutorConfig({
+            maxMessageSize: 10000, // max bytes per cross-chain message
+            executor: BSC_EXECUTOR // address that pays destination execution fees on B
+        });
+        bytes memory encodedUln = abi.encode(uln);
+        bytes memory encodedExec = abi.encode(exec);
+        SetConfigParam[] memory params;
+        params = new SetConfigParam[](2);
+        params[0] = SetConfigParam(eid, EXECUTOR_CONFIG_TYPE, encodedExec);
+        params[1] = SetConfigParam(eid, ULN_CONFIG_TYPE, encodedUln);
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        ILayerZeroEndpointV2(endpoint).setConfig(oapp, sendLib, params); // Set config for messages sent from A to B
         vm.stopBroadcast();
     }
 }

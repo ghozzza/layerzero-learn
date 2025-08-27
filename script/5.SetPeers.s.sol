@@ -10,43 +10,119 @@ import {Helper} from "./Helper.sol";
 contract SetPeers is Script, Helper {
     function setUp() public {
         // vm.createSelectFork(vm.rpcUrl("base_sepolia"));
-        vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
+        // vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
     }
 
     function run() external {
-        address oapp;
-        uint32 eid1;
-        bytes32 peer1;
-        uint32 eid2;
-        bytes32 peer2;
+        deployBASE();
+        // deployARB();
+        // deployKAIA();
+        // deployPOL();
+        // deployBSC();
+    }
 
-        vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
+    function deployBASE() public {
+        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
         // Load environment variables
-        oapp = ARB_OAPP; // Your OApp contract address
+        address oapp = BASE_OAPP; // Your OApp contract address
         // Example: Set peers for different chains
         // Format: (chain EID, peer address in bytes32)
-        (eid1, peer1) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
-        (eid2, peer2) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
-        vm.startBroadcast(vm.envUint("TESTNET_PRIVATE_KEY"));
+        (uint32 eid1, bytes32 peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
+        (uint32 eid2, bytes32 peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
+        (uint32 eid3, bytes32 peer3) = (KAIA_EID, bytes32(uint256(uint160(KAIA_OAPP))));
+        (uint32 eid4, bytes32 peer4) = (POL_EID, bytes32(uint256(uint160(POL_OAPP))));
+        (uint32 eid5, bytes32 peer5) = (BSC_EID, bytes32(uint256(uint160(BSC_OAPP))));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         // Set peers for each chain
         MyOApp(oapp).setPeer(eid1, peer1);
         MyOApp(oapp).setPeer(eid2, peer2);
+        MyOApp(oapp).setPeer(eid3, peer3);
+        MyOApp(oapp).setPeer(eid4, peer4);
+        MyOApp(oapp).setPeer(eid5, peer5);
         vm.stopBroadcast();
+    }
 
-        console.log("============================================================================================");
-        console.log("============================================================================================");
-
-        vm.createSelectFork(vm.rpcUrl("base_sepolia"));
+    function deployARB() public {
+        vm.createSelectFork(vm.rpcUrl("arb_mainnet"));
         // Load environment variables
-        oapp = BASE_OAPP; // Your OApp contract address
+        address oapp = ARB_OAPP; // Your OApp contract address
         // Example: Set peers for different chains
         // Format: (chain EID, peer address in bytes32)
-        (eid1, peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
-        (eid2, peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP)))); // Your OApp contract address
-        vm.startBroadcast(vm.envUint("TESTNET_PRIVATE_KEY"));
+        (uint32 eid1, bytes32 peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
+        (uint32 eid2, bytes32 peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
+        (uint32 eid3, bytes32 peer3) = (KAIA_EID, bytes32(uint256(uint160(KAIA_OAPP))));
+        (uint32 eid4, bytes32 peer4) = (POL_EID, bytes32(uint256(uint160(POL_OAPP))));
+        (uint32 eid5, bytes32 peer5) = (BSC_EID, bytes32(uint256(uint160(BSC_OAPP))));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         // Set peers for each chain
-        MyOApp(oapp).setPeer(eid1, peer2);
+        MyOApp(oapp).setPeer(eid1, peer1);
         MyOApp(oapp).setPeer(eid2, peer2);
+        MyOApp(oapp).setPeer(eid3, peer3);
+        MyOApp(oapp).setPeer(eid4, peer4);
+        MyOApp(oapp).setPeer(eid5, peer5);
+        vm.stopBroadcast();
+    }
+
+    function deployKAIA() public {
+        vm.createSelectFork(vm.rpcUrl("kaia_mainnet"));
+        // Load environment variables
+        address oapp = KAIA_OAPP; // Your OApp contract address
+        // Example: Set peers for different chains
+        // Format: (chain EID, peer address in bytes32)
+        (uint32 eid1, bytes32 peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
+        (uint32 eid2, bytes32 peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
+        (uint32 eid3, bytes32 peer3) = (KAIA_EID, bytes32(uint256(uint160(KAIA_OAPP))));
+        (uint32 eid4, bytes32 peer4) = (POL_EID, bytes32(uint256(uint160(POL_OAPP))));
+        (uint32 eid5, bytes32 peer5) = (BSC_EID, bytes32(uint256(uint160(BSC_OAPP))));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        // Set peers for each chain
+        MyOApp(oapp).setPeer(eid1, peer1);
+        MyOApp(oapp).setPeer(eid2, peer2);
+        MyOApp(oapp).setPeer(eid3, peer3);
+        MyOApp(oapp).setPeer(eid4, peer4);
+        MyOApp(oapp).setPeer(eid5, peer5);
+        vm.stopBroadcast();
+    }
+
+    function deployPOL() public {
+        vm.createSelectFork(vm.rpcUrl("pol_mainnet"));
+        // Load environment variables
+        address oapp = POL_OAPP; // Your OApp contract address
+        // Example: Set peers for different chains
+        // Format: (chain EID, peer address in bytes32)
+        (uint32 eid1, bytes32 peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
+        (uint32 eid2, bytes32 peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
+        (uint32 eid3, bytes32 peer3) = (KAIA_EID, bytes32(uint256(uint160(KAIA_OAPP))));
+        (uint32 eid4, bytes32 peer4) = (POL_EID, bytes32(uint256(uint160(POL_OAPP))));
+        (uint32 eid5, bytes32 peer5) = (BSC_EID, bytes32(uint256(uint160(BSC_OAPP))));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        // Set peers for each chain
+        MyOApp(oapp).setPeer(eid1, peer1);
+        MyOApp(oapp).setPeer(eid2, peer2);
+        MyOApp(oapp).setPeer(eid3, peer3);
+        MyOApp(oapp).setPeer(eid4, peer4);
+        MyOApp(oapp).setPeer(eid5, peer5);
+        vm.stopBroadcast();
+    }
+
+    function deployBSC() public {
+        vm.createSelectFork(vm.rpcUrl("bsc_mainnet"));
+        // Load environment variables
+        address oapp = BSC_OAPP; // Your OApp contract address
+        // Example: Set peers for different chains
+        // Format: (chain EID, peer address in bytes32)
+        (uint32 eid1, bytes32 peer1) = (BASE_EID, bytes32(uint256(uint160(BASE_OAPP))));
+        (uint32 eid2, bytes32 peer2) = (ARB_EID, bytes32(uint256(uint160(ARB_OAPP))));
+        (uint32 eid3, bytes32 peer3) = (KAIA_EID, bytes32(uint256(uint160(KAIA_OAPP))));
+        (uint32 eid4, bytes32 peer4) = (POL_EID, bytes32(uint256(uint160(POL_OAPP))));
+        (uint32 eid5, bytes32 peer5) = (BSC_EID, bytes32(uint256(uint160(BSC_OAPP))));
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        // Set peers for each chain
+        MyOApp(oapp).setPeer(eid1, peer1);
+        MyOApp(oapp).setPeer(eid2, peer2);
+        MyOApp(oapp).setPeer(eid3, peer3);
+        MyOApp(oapp).setPeer(eid4, peer4);
+        MyOApp(oapp).setPeer(eid5, peer5);
         vm.stopBroadcast();
     }
 }
