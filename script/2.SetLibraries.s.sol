@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.22;
 
-import "forge-std/Script.sol";
+import {Script} from "forge-std/Script.sol";
 import {ILayerZeroEndpointV2} from "@layerzerolabs/lz-evm-protocol-v2/contracts/interfaces/ILayerZeroEndpointV2.sol";
 import {Helper} from "./Helper.sol";
 
@@ -13,11 +13,6 @@ contract SetLibraries is Script, Helper {
     uint32 dstEid2 = KAIA_EID; // Destination chain EID
     uint32 dstEid3 = POL_EID; // Destination chain EID
     uint32 dstEid4 = BSC_EID; // Destination chain EID
-
-    function setUp() public {
-        // vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
-        // vm.createSelectFork(vm.rpcUrl("base_sepolia"));
-    }
 
     function run() external {
         deployBASE();

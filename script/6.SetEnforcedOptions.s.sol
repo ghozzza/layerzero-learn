@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.22;
 
-import "forge-std/Script.sol";
+import {Script, console} from "forge-std/Script.sol";
 import {MyOApp} from "../src/MyOApp.sol";
 import {EnforcedOptionParam} from "@layerzerolabs/oapp-evm/contracts/oapp/libs/OAppOptionsType3.sol";
 import {OptionsBuilder} from "@layerzerolabs/oapp-evm/contracts/oapp/libs/OptionsBuilder.sol";
@@ -76,8 +76,8 @@ contract SetEnforcedOptions is Script, Helper {
         address oapp = ARB_OAPP; // Your OApp contract address
 
         // Destination chain configurations
-        uint32 dstEid1 = BASE_EID; // First destination EID
-        uint32 dstEid2 = ARB_EID; // Second destination EID
+        uint32 dstEid2 = BASE_EID; // First destination EID
+        uint32 dstEid1 = ARB_EID; // Second destination EID
         uint32 dstEid3 = KAIA_EID; // Third destination EID
         uint32 dstEid4 = POL_EID; // Fourth destination EID
         uint32 dstEid5 = BSC_EID; // Fifth destination EID
@@ -90,9 +90,9 @@ contract SetEnforcedOptions is Script, Helper {
         EnforcedOptionParam[] memory enforcedOptions;
         enforcedOptions = new EnforcedOptionParam[](5);
         // Set enforced options for first destination
-        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options2});
+        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options1});
         // Set enforced options for second destination
-        enforcedOptions[1] = EnforcedOptionParam({eid: dstEid2, msgType: SEND, options: options1});
+        enforcedOptions[1] = EnforcedOptionParam({eid: dstEid2, msgType: SEND, options: options2});
         // Set enforced options for third destination
         enforcedOptions[2] = EnforcedOptionParam({eid: dstEid3, msgType: SEND, options: options2});
         // Set enforced options for fourth destination
@@ -119,9 +119,9 @@ contract SetEnforcedOptions is Script, Helper {
         address oapp = KAIA_OAPP; // Your OApp contract address
 
         // Destination chain configurations
-        uint32 dstEid1 = BASE_EID; // First destination EID
+        uint32 dstEid3 = BASE_EID; // First destination EID
         uint32 dstEid2 = ARB_EID; // Second destination EID
-        uint32 dstEid3 = KAIA_EID; // Third destination EID
+        uint32 dstEid1 = KAIA_EID; // Third destination EID
         uint32 dstEid4 = POL_EID; // Fourth destination EID
         uint32 dstEid5 = BSC_EID; // Fifth destination EID
 
@@ -133,11 +133,11 @@ contract SetEnforcedOptions is Script, Helper {
         EnforcedOptionParam[] memory enforcedOptions;
         enforcedOptions = new EnforcedOptionParam[](5);
         // Set enforced options for first destination
-        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options2});
+        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options1});
         // Set enforced options for second destination
         enforcedOptions[1] = EnforcedOptionParam({eid: dstEid2, msgType: SEND, options: options2});
         // Set enforced options for third destination
-        enforcedOptions[2] = EnforcedOptionParam({eid: dstEid3, msgType: SEND, options: options1});
+        enforcedOptions[2] = EnforcedOptionParam({eid: dstEid3, msgType: SEND, options: options2});
         // Set enforced options for fourth destination
         enforcedOptions[3] = EnforcedOptionParam({eid: dstEid4, msgType: SEND, options: options2});
         // Set enforced options for fifth destination
@@ -162,10 +162,10 @@ contract SetEnforcedOptions is Script, Helper {
         address oapp = POL_OAPP; // Your OApp contract address
 
         // Destination chain configurations
-        uint32 dstEid1 = BASE_EID; // First destination EID
+        uint32 dstEid4 = BASE_EID; // First destination EID
         uint32 dstEid2 = ARB_EID; // Second destination EID
         uint32 dstEid3 = KAIA_EID; // Third destination EID
-        uint32 dstEid4 = POL_EID; // Fourth destination EID
+        uint32 dstEid1 = POL_EID; // Fourth destination EID
         uint32 dstEid5 = BSC_EID; // Fifth destination EID
 
         // Build options using OptionsBuilder
@@ -176,13 +176,13 @@ contract SetEnforcedOptions is Script, Helper {
         EnforcedOptionParam[] memory enforcedOptions;
         enforcedOptions = new EnforcedOptionParam[](5);
         // Set enforced options for first destination
-        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options2});
+        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options1});
         // Set enforced options for second destination
         enforcedOptions[1] = EnforcedOptionParam({eid: dstEid2, msgType: SEND, options: options2});
         // Set enforced options for third destination
         enforcedOptions[2] = EnforcedOptionParam({eid: dstEid3, msgType: SEND, options: options2});
         // Set enforced options for fourth destination
-        enforcedOptions[3] = EnforcedOptionParam({eid: dstEid4, msgType: SEND, options: options1});
+        enforcedOptions[3] = EnforcedOptionParam({eid: dstEid4, msgType: SEND, options: options2});
         // Set enforced options for fifth destination
         enforcedOptions[4] = EnforcedOptionParam({eid: dstEid5, msgType: SEND, options: options2});
 
@@ -205,11 +205,11 @@ contract SetEnforcedOptions is Script, Helper {
         address oapp = BSC_OAPP; // Your OApp contract address
 
         // Destination chain configurations
-        uint32 dstEid1 = BASE_EID; // First destination EID
+        uint32 dstEid5 = BASE_EID; // First destination EID
         uint32 dstEid2 = ARB_EID; // Second destination EID
         uint32 dstEid3 = KAIA_EID; // Third destination EID
         uint32 dstEid4 = POL_EID; // Fourth destination EID
-        uint32 dstEid5 = BSC_EID; // Fifth destination EID
+        uint32 dstEid1 = BSC_EID; // Fifth destination EID
 
         // Build options using OptionsBuilder
         bytes memory options1 = OptionsBuilder.newOptions().addExecutorLzReceiveOption(80000, 0);
@@ -219,7 +219,7 @@ contract SetEnforcedOptions is Script, Helper {
         EnforcedOptionParam[] memory enforcedOptions;
         enforcedOptions = new EnforcedOptionParam[](5);
         // Set enforced options for first destination
-        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options2});
+        enforcedOptions[0] = EnforcedOptionParam({eid: dstEid1, msgType: SEND, options: options1});
         // Set enforced options for second destination
         enforcedOptions[1] = EnforcedOptionParam({eid: dstEid2, msgType: SEND, options: options2});
         // Set enforced options for third destination
@@ -227,7 +227,7 @@ contract SetEnforcedOptions is Script, Helper {
         // Set enforced options for fourth destination
         enforcedOptions[3] = EnforcedOptionParam({eid: dstEid4, msgType: SEND, options: options2});
         // Set enforced options for fifth destination
-        enforcedOptions[4] = EnforcedOptionParam({eid: dstEid5, msgType: SEND, options: options1});
+        enforcedOptions[4] = EnforcedOptionParam({eid: dstEid5, msgType: SEND, options: options2});
 
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         MyOApp(oapp).setEnforcedOptions(enforcedOptions);

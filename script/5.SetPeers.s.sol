@@ -1,24 +1,20 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.22;
 
-import "forge-std/Script.sol";
+import {Script} from "forge-std/Script.sol";
 import {MyOApp} from "../src/MyOApp.sol";
 import {Helper} from "./Helper.sol";
 
 /// @title LayerZero OApp Peer Configuration Script
 /// @notice Sets up peer connections between OApp deployments on different chains
 contract SetPeers is Script, Helper {
-    function setUp() public {
-        // vm.createSelectFork(vm.rpcUrl("base_sepolia"));
-        // vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
-    }
 
     function run() external {
         deployBASE();
-        // deployARB();
-        // deployKAIA();
-        // deployPOL();
-        // deployBSC();
+        deployARB();
+        deployKAIA();
+        deployPOL();
+        deployBSC();
     }
 
     function deployBASE() public {

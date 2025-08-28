@@ -7,20 +7,21 @@ import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IER
 import {Helper} from "./Helper.sol";
 
 contract MintToken is Script, Helper {
+    // ***** FILL THIS IN *****
+    address public TOKEN = KAIA_IDRX;
+    // ************************
+
     function setUp() public {
-        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
+        vm.createSelectFork(vm.rpcUrl("kaia_mainnet"));
     }
 
     function run() public {
         vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
         // balance before mint
-        console.log("balance before mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("PUBLIC_KEY")));
-        console.log("balance before mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("PUBLIC_KEY")));
-        MyOFT(BASE_USDT).mint(vm.envAddress("PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_USDT).decimals());
-        MyOFT(BASE_IDRX).mint(vm.envAddress("PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(BASE_IDRX).decimals());
+        console.log("balance before mint: ", MyOFT(TOKEN).balanceOf(vm.envAddress("PUBLIC_KEY")));
+        MyOFT(TOKEN).mint(vm.envAddress("PUBLIC_KEY"), 10_000 * 10 ** IERC20Metadata(TOKEN).decimals());
         // balance after mint
-        console.log("balance after mint: ", MyOFT(BASE_USDT).balanceOf(vm.envAddress("PUBLIC_KEY")));
-        console.log("balance after mint: ", MyOFT(BASE_IDRX).balanceOf(vm.envAddress("PUBLIC_KEY")));
+        console.log("balance after mint: ", MyOFT(TOKEN).balanceOf(vm.envAddress("PUBLIC_KEY")));
         vm.stopBroadcast();
     }
 }

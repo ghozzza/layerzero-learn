@@ -8,6 +8,7 @@ import {MyMintBurnOFTAdapterDecimal2} from "../src/MyMintBurnOFTAdapterDecimal2.
 import {IMintableBurnable} from "@layerzerolabs/oft-evm/contracts/interfaces/IMintableBurnable.sol";
 import {Helper} from "./Helper.sol";
 import {SrcEidLib} from "../src/SrcEidLib.sol";
+import {ISrcEidLib} from "../src/interfaces/ISrcEidLib.sol";
 
 contract DeployOApp is Script, Helper {
     ElevatedMinterBurner public minterBurner;
@@ -17,17 +18,22 @@ contract DeployOApp is Script, Helper {
 
     address owner = vm.envAddress("PUBLIC_KEY");
 
-    function setUp() public {
-        // vm.createSelectFork(vm.rpcUrl("arb_sepolia"));
-        // vm.createSelectFork(vm.rpcUrl("base_sepolia"));
-    }
-
     function run() public {
         // deployBASE();
         // deployARB();
-        // deployKAIA();
+        deployKAIA();
         // deployPOL();
-        deployBSC();
+        // deployBSC();
+    }
+
+    function srcEidInfo() public view returns (ISrcEidLib.SrcEidInfo[] memory) {
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = new ISrcEidLib.SrcEidInfo[](5);
+        srcEidInfos[0] = ISrcEidLib.SrcEidInfo({eid: BASE_EID, decimals: 2});
+        srcEidInfos[1] = ISrcEidLib.SrcEidInfo({eid: ARB_EID, decimals: 2});
+        srcEidInfos[2] = ISrcEidLib.SrcEidInfo({eid: KAIA_EID, decimals: 2});
+        srcEidInfos[3] = ISrcEidLib.SrcEidInfo({eid: POL_EID, decimals: 0});
+        srcEidInfos[4] = ISrcEidLib.SrcEidInfo({eid: BSC_EID, decimals: 0});
+        return srcEidInfos;
     }
 
     function deployBASE() public {
@@ -36,19 +42,8 @@ contract DeployOApp is Script, Helper {
 
         vm.createSelectFork(vm.rpcUrl("base_mainnet"));
         vm.startBroadcast(privateKey);
-        uint32[] memory srcEids = new uint32[](5);
-        srcEids[0] = BASE_EID;
-        srcEids[1] = ARB_EID;
-        srcEids[2] = KAIA_EID;
-        srcEids[3] = POL_EID;
-        srcEids[4] = BSC_EID;
-        uint8[] memory decimals = new uint8[](5);
-        decimals[0] = 2;
-        decimals[1] = 2;
-        decimals[2] = 2;
-        decimals[3] = 0;
-        decimals[4] = 0;
-        srcEidLib = new SrcEidLib(srcEids, decimals, owner);
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = srcEidInfo();
+        srcEidLib = new SrcEidLib(srcEidInfos, owner);
         minterBurner = new ElevatedMinterBurner(IMintableBurnable(BASE_IDRX), owner);
         oappDecimal2 = new MyMintBurnOFTAdapterDecimal2(
             BASE_IDRX, IMintableBurnable(BASE_IDRX), endpoint, owner, address(srcEidLib)
@@ -56,6 +51,7 @@ contract DeployOApp is Script, Helper {
         minterBurner.setOperator(address(oappDecimal2), true);
         vm.stopBroadcast();
 
+        console.log("address public BASE_SRC_EID_LIB =", address(srcEidLib), ";");
         console.log("address public BASE_OAPP =", address(oappDecimal2), ";");
         console.log("address public BASE_MINTER_BURNER =", address(minterBurner), ";");
     }
@@ -66,25 +62,15 @@ contract DeployOApp is Script, Helper {
 
         vm.createSelectFork(vm.rpcUrl("arb_mainnet"));
         vm.startBroadcast(privateKey);
-        uint32[] memory srcEids = new uint32[](5);
-        srcEids[0] = BASE_EID;
-        srcEids[1] = ARB_EID;
-        srcEids[2] = KAIA_EID;
-        srcEids[3] = POL_EID;
-        srcEids[4] = BSC_EID;
-        uint8[] memory decimals = new uint8[](5);
-        decimals[0] = 2;
-        decimals[1] = 2;
-        decimals[2] = 2;
-        decimals[3] = 0;
-        decimals[4] = 0;
-        srcEidLib = new SrcEidLib(srcEids, decimals, owner);
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = srcEidInfo();
+        srcEidLib = new SrcEidLib(srcEidInfos, owner);
         minterBurner = new ElevatedMinterBurner(IMintableBurnable(ARB_IDRX), owner);
         oappDecimal2 =
             new MyMintBurnOFTAdapterDecimal2(ARB_IDRX, IMintableBurnable(ARB_IDRX), endpoint, owner, address(srcEidLib));
         minterBurner.setOperator(address(oappDecimal2), true);
         vm.stopBroadcast();
 
+        console.log("address public ARB_SRC_EID_LIB =", address(srcEidLib), ";");
         console.log("address public ARB_OAPP =", address(oappDecimal2), ";");
         console.log("address public ARB_MINTER_BURNER =", address(minterBurner), ";");
     }
@@ -95,19 +81,8 @@ contract DeployOApp is Script, Helper {
 
         vm.createSelectFork(vm.rpcUrl("kaia_mainnet"));
         vm.startBroadcast(privateKey);
-        uint32[] memory srcEids = new uint32[](5);
-        srcEids[0] = BASE_EID;
-        srcEids[1] = ARB_EID;
-        srcEids[2] = KAIA_EID;
-        srcEids[3] = POL_EID;
-        srcEids[4] = BSC_EID;
-        uint8[] memory decimals = new uint8[](5);
-        decimals[0] = 2;
-        decimals[1] = 2;
-        decimals[2] = 2;
-        decimals[3] = 0;
-        decimals[4] = 0;
-        srcEidLib = new SrcEidLib(srcEids, decimals, owner);
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = srcEidInfo();
+        srcEidLib = new SrcEidLib(srcEidInfos, owner);
         minterBurner = new ElevatedMinterBurner(IMintableBurnable(KAIA_IDRX), owner);
         oappDecimal2 = new MyMintBurnOFTAdapterDecimal2(
             KAIA_IDRX, IMintableBurnable(KAIA_IDRX), endpoint, owner, address(srcEidLib)
@@ -115,6 +90,7 @@ contract DeployOApp is Script, Helper {
         minterBurner.setOperator(address(oappDecimal2), true);
         vm.stopBroadcast();
 
+        console.log("address public KAIA_SRC_EID_LIB =", address(srcEidLib), ";");
         console.log("address public KAIA_OAPP =", address(oappDecimal2), ";");
         console.log("address public KAIA_MINTER_BURNER =", address(minterBurner), ";");
     }
@@ -125,26 +101,16 @@ contract DeployOApp is Script, Helper {
 
         vm.createSelectFork(vm.rpcUrl("pol_mainnet"));
         vm.startBroadcast(privateKey);
-        uint32[] memory srcEids = new uint32[](5);
-        srcEids[0] = BASE_EID;
-        srcEids[1] = ARB_EID;
-        srcEids[2] = KAIA_EID;
-        srcEids[3] = POL_EID;
-        srcEids[4] = BSC_EID;
-        uint8[] memory decimals = new uint8[](5);
-        decimals[0] = 2;
-        decimals[1] = 2;
-        decimals[2] = 2;
-        decimals[3] = 0;
-        decimals[4] = 0;
-        srcEidLib = new SrcEidLib(srcEids, decimals, owner);
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = srcEidInfo();
+        srcEidLib = new SrcEidLib(srcEidInfos, owner);
         minterBurner = new ElevatedMinterBurner(IMintableBurnable(POL_IDRX), owner);
-        oappDecimal2 =
-            new MyMintBurnOFTAdapterDecimal2(POL_IDRX, IMintableBurnable(POL_IDRX), endpoint, owner, address(srcEidLib));
-        minterBurner.setOperator(address(oappDecimal2), true);
+        oappDecimal0 =
+            new MyMintBurnOFTAdapterDecimal0(POL_IDRX, IMintableBurnable(POL_IDRX), endpoint, owner, address(srcEidLib));
+        minterBurner.setOperator(address(oappDecimal0), true);
         vm.stopBroadcast();
 
-        console.log("address public POL_OAPP =", address(oappDecimal2), ";");
+        console.log("address public POL_SRC_EID_LIB =", address(srcEidLib), ";");
+        console.log("address public POL_OAPP =", address(oappDecimal0), ";");
         console.log("address public POL_MINTER_BURNER =", address(minterBurner), ";");
     }
 
@@ -154,36 +120,19 @@ contract DeployOApp is Script, Helper {
 
         vm.createSelectFork(vm.rpcUrl("bsc_mainnet"));
         vm.startBroadcast(privateKey);
-        uint32[] memory srcEids = new uint32[](5);
-        srcEids[0] = BASE_EID;
-        srcEids[1] = ARB_EID;
-        srcEids[2] = KAIA_EID;
-        srcEids[3] = POL_EID;
-        srcEids[4] = BSC_EID;
-        uint8[] memory decimals = new uint8[](5);
-        decimals[0] = 2;
-        decimals[1] = 2;
-        decimals[2] = 2;
-        decimals[3] = 0;
-        decimals[4] = 0;
-        srcEidLib = new SrcEidLib(srcEids, decimals, owner);
+        ISrcEidLib.SrcEidInfo[] memory srcEidInfos = srcEidInfo();
+        srcEidLib = new SrcEidLib(srcEidInfos, owner);
         minterBurner = new ElevatedMinterBurner(IMintableBurnable(BSC_IDRX), owner);
-        oappDecimal2 =
-            new MyMintBurnOFTAdapterDecimal2(BSC_IDRX, IMintableBurnable(BSC_IDRX), endpoint, owner, address(srcEidLib));
-        minterBurner.setOperator(address(oappDecimal2), true);
+        oappDecimal0 =
+            new MyMintBurnOFTAdapterDecimal0(BSC_IDRX, IMintableBurnable(BSC_IDRX), endpoint, owner, address(srcEidLib));
+        minterBurner.setOperator(address(oappDecimal0), true);
         vm.stopBroadcast();
 
-        console.log("address public BSC_OAPP =", address(oappDecimal2), ";");
+        console.log("address public BSC_SRC_EID_LIB =", address(srcEidLib), ";");
+        console.log("address public BSC_OAPP =", address(oappDecimal0), ";");
         console.log("address public BSC_MINTER_BURNER =", address(minterBurner), ";");
     }
     // RUN
-    // forge script DeployOApp --broadcast -vvv --verify --verifier etherscan --etherscan-api-key 285CY8ZFXPCHJA8VEEVHH3HPAHF59D6R1J
-    //   === BASE ===
-    //   MinterBurner deployed to: 0x466a36D7B83EA1e6CC08548E71D6e4e611929ef3
-    //   MyOApp deployed to: 0x3BC24c85aFE8b53368E69dbB74c1130bf4545FB0
-    //   ============================================================================================
-    //   ============================================================================================
-    //   === ARB ===
-    //   MinterBurner deployed to: 0x88728dFdbd742553DDD005D43D6C8eB19B681118
-    //   MyOApp deployed to: 0x64001099241E7D98d413dF25B8D6a1C196231117
+    // forge script DeployOApp --broadcast -vvv --verify --verifier etherscan --etherscan-api-key $ETHERSCAN_API_KEY
+    // forge script DeployOApp --broadcast -vvv --verify
 }

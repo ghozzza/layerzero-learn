@@ -11,7 +11,7 @@ contract ReadDecimal is Script, Helper {
         vm.createSelectFork(vm.rpcUrl("base_mainnet"));
     }
 
-    function run() public {
+    function run() public view {
         console.log("IDRX decimal: ", IERC20Metadata(BASE_IDRX).decimals());
         console.log("USDT decimal: ", IERC20Metadata(BASE_USDT).decimals());
     }

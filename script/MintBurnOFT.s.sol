@@ -18,8 +18,8 @@ contract MintBurnOFTScript is Script, Helper {
 
         // Note: MintBurnOFT requires an existing ERC20 token and minter/burner contract
         // These parameters need to be updated with actual deployed contract addresses
-        address existingToken = address(0); // Replace with your ERC20 token address
-        address minterBurner = address(0);  // Replace with your minter/burner contract address
+        // address existingToken = BASE_IDRX; // Replace with your ERC20 token address
+        // address minterBurner = BASE_IDRX_MINTER_BURNER;  // Replace with your minter/burner contract address
         
         // Uncomment and update addresses when ready to deploy:
         // mintBurnOFT = new MintBurnOFT(

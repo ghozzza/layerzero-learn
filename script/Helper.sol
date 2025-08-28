@@ -43,7 +43,7 @@ contract Helper {
     address public BASE_RECEIVE_LIB = 0xc70AB6f32772f59fBfc23889Caf4Ba3376C84bAf;
     address public KAIA_RECEIVE_LIB = 0x937AbA873827BF883CeD83CA557697427eAA46Ee;
     address public POL_RECEIVE_LIB = 0x1322871e4ab09Bc7f5717189434f97bBD9546e95;
-    address public BSC_RECEIVE_LIB = 0x9F8C645f2D0b2159767Bd6E0839DE4BE49e823DE;
+    address public BSC_RECEIVE_LIB = 0xB217266c3A98C8B2709Ee26836C98cf12f6cCEC1;
 
     uint32 public ARB_EID = 30110;
     uint32 public BASE_EID = 30184;
@@ -51,64 +51,63 @@ contract Helper {
     uint32 public POL_EID = 30109;
     uint32 public BSC_EID = 30102;
 
-    address public ARB_DVN1 = 0x0711dd777AE626ef5E0a4F50e199C7a0E0666857; // BitGo
+    // address public ARB_DVN1 = 0x0711dd777AE626ef5E0a4F50e199C7a0E0666857; // BitGo
+    // address public ARB_DVN1 = 0x5756a74e8e18D8392605bA667171962B2b2826B5; // Stargate
     address public ARB_DVN2 = 0x2f55C492897526677C5B68fb199ea31E2c126416; // LayerZeroLabs
-
-    address public BASE_DVN1 = 0x133e9fB2D339D8428476A714B1113B024343811E; // BitGo
+    // address public BASE_DVN1 = 0x133e9fB2D339D8428476A714B1113B024343811E; // BitGo
+    // address public BASE_DVN1 = 0xcd37CA043f8479064e10635020c65FfC005d36f6; // Nethermind
+    // address public BASE_DVN2 = 0xcdF31d62140204C08853b547E64707110fBC6680; // Stargate
+    // address public BASE_DVN1 = 0xcdF31d62140204C08853b547E64707110fBC6680; // Stargate
     address public BASE_DVN2 = 0x9e059a54699a285714207b43B055483E78FAac25; // LayerZeroLabs
-
+    // address public KAIA_DVN1 = 0x1154d04d07AEe26ff2C200Bd373eb76a7e5694d6; // Canary
+    // address public KAIA_DVN2 = 0xca29B2be45F1D609189dc467e0f1E48ee202eD0E; // Deutsche Telekom
     // address public KAIA_DVN1 = 0x28af4dADbc5066e994986E8bb105240023dC44B6; // BCW Group
-    address public KAIA_DVN1 = 0x1154d04d07aee26ff2c200bd373eb76a7e5694d6; // Canary
+    // address public KAIA_DVN1 = 0x17720E3F361dCc2f70871a2ce3ac51b0Eaa5c2E4; // Stargate
     address public KAIA_DVN2 = 0xc80233AD8251E668BecbC3B0415707fC7075501e; // LayerZeroLabs
-
-    address public POL_DVN1 = 0x02152F4624596602dCBB8B8EAD2988Ad44EDc865; // BitGo
+    // address public POL_DVN1 = 0x02152F4624596602dCBB8B8EAD2988Ad44EDc865; // BitGo
+    // address public POL_DVN1 = 0xC79F0B1bcb7cDAE9f9BA547dcFc57cBfcd2993A5; // Stargate
     address public POL_DVN2 = 0x23DE2FE932d9043291f870324B74F820e11dc81A; // LayerZeroLabs
-
-    address public BSC_DVN1 = 0xa2CEB887f545400B8247Dfb7E9cCAda7abAbBDE8; // BitGo
+    // address public BSC_DVN1 = 0xa2CEB887f545400B8247Dfb7E9cCAda7abAbBDE8; // BitGo
+    // address public BSC_DVN1 = 0xac8de74CE0A44A5e73BBc709fe800406F58431e0; // Stargate
     address public BSC_DVN2 = 0xfD6865c841c2d64565562fCc7e05e619A30615f0; // LayerZeroLabs
 
     address public ARB_EXECUTOR = 0x31CAe3B7fB82d847621859fb1585353c5720660D;
-
     address public BASE_EXECUTOR = 0x2CCA08ae69E0C44b18a57Ab2A87644234dAebaE4;
-
     address public KAIA_EXECUTOR = 0xe149187a987F129FD3d397ED04a60b0b89D1669f;
-
     address public POL_EXECUTOR = 0xCd3F213AD101472e1713C72B1697E727C803885b;
-
     address public BSC_EXECUTOR = 0x3ebD570ed38B1b3b4BC886999fcF507e9D584859;
 
     // ** SELF DEPLOYED Mainnet **
-    address public ARB_USDT = 0x881842D66378b06D9CAb6Ab60F57BAeAcE96a6dF;
-    address public ARB_IDRX = 0x0646f9BE4d5118765F4edCFa456c2F0d2180bA3c; // done
+    address public ARB_USDT = 0xfDb1e60C6Fc710f95483c03F6434984FEB31EABb;
+    address public ARB_IDRX = 0xea04fB314e0e25691954D5fE7F9bD82886D99586; // done
+    address public BASE_USDT = 0xE6Ea3Ab0304d76e6Ba93F026A4352Da87D262182;
+    address public BASE_IDRX = 0x480Ca1e04D0d6c90Df863ac9396f2a918F1902e3; // done
+    address public KAIA_USDT = 0x2b2A8a934D702E5D1bf80a463a270F2A5d5194E6;
+    address public KAIA_IDRX = 0x8a78c8E89366A3FD722cE333B78CB72cEFE72881; // done
+    address public POL_USDT = 0xF54eFFB6f27edBebfBDB32f5718f08F174799C4b;
+    address public POL_IDRX = 0x8b29189bfF51aBD5B87afB6EfB5564bC02383cF5; // done
+    address public BSC_USDT = 0x91Ba85eA66D8b40385b1583ED91341923b8193c2;
+    address public BSC_IDRX = 0x5c04eda221dc89359b2DB9Add642D8D410629714; // done
 
-    address public BASE_USDT = 0xA769d6492d58840fc1DF124fA4fd3a96B5ef0E71;
-    address public BASE_IDRX = 0x9ceEf5A1a46d5016226e61535aA52E4101cc9853; // done
-
-    address public KAIA_USDT = 0xA769d6492d58840fc1DF124fA4fd3a96B5ef0E71;
-    address public KAIA_IDRX = 0x9ceEf5A1a46d5016226e61535aA52E4101cc9853; // done
-
-    address public POL_USDT = 0xA769d6492d58840fc1DF124fA4fd3a96B5ef0E71;
-    address public POL_IDRX = 0x9ceEf5A1a46d5016226e61535aA52E4101cc9853; // done
-
-    address public BSC_USDT = 0xA769d6492d58840fc1DF124fA4fd3a96B5ef0E71;
-    address public BSC_IDRX = 0x9ceEf5A1a46d5016226e61535aA52E4101cc9853; // done
-
-    address public BASE_OAPP = 0xb4C0000dba17E1298Eff76F1750C54Dec7967e18;
-    address public BASE_MINTER_BURNER = 0x27E2FC01cbe5A211Fa98e5eC25C9A32aAe992b1B; // done
-
-    address public ARB_OAPP = 0x49da57BBA8CF2A3A574EA2eB2d50f29a96d2f377;
-    address public ARB_MINTER_BURNER = 0x9234310cC050a8A84ccF7a7421e982c4b648ea7C; // done
-
-    address public KAIA_OAPP = 0xb4C0000dba17E1298Eff76F1750C54Dec7967e18;
-    address public KAIA_MINTER_BURNER = 0x27E2FC01cbe5A211Fa98e5eC25C9A32aAe992b1B; // done
-
-    address public POL_OAPP = 0xb4C0000dba17E1298Eff76F1750C54Dec7967e18;
-    address public POL_MINTER_BURNER = 0x27E2FC01cbe5A211Fa98e5eC25C9A32aAe992b1B; // done
-
-    address public BSC_OAPP = 0xb4C0000dba17E1298Eff76F1750C54Dec7967e18;
-    address public BSC_MINTER_BURNER = 0x27E2FC01cbe5A211Fa98e5eC25C9A32aAe992b1B; // done
+    address public BASE_OAPP = 0xDcd5c600bF44c3A8DB8cB61516C4B52820BB2Aa8;
+    address public BASE_MINTER_BURNER = 0x95cE8e18d4f32056316BDDe4eF88418F63b35458; // done
+    address public ARB_OAPP = 0xcA5A4A77e59cdBE5c194799cF677582e95061e96;
+    address public ARB_MINTER_BURNER = 0xF9C056A0a6e22f9E2F3413fe512b9Ff1FC2827D5; // done
+    address public POL_OAPP = 0xD928e3598685E28506C4B39F4559e4112018CbE3;
+    address public POL_MINTER_BURNER = 0x8a78c8E89366A3FD722cE333B78CB72cEFE72881; // done
+    address public BSC_OAPP = 0xea04fB314e0e25691954D5fE7F9bD82886D99586;
+    address public BSC_MINTER_BURNER = 0xfDb1e60C6Fc710f95483c03F6434984FEB31EABb; // done
+    address public KAIA_OAPP = 0x583C963CB88FD42409021039B692646617F77b63;
+    address public KAIA_MINTER_BURNER = 0x9c4998ce1633B76a2E89E7D9A72f3e9A19EbC10e; // done
         // *******************
-        // *******************
+        //     forge verify-contract --verifier-url https://mainnet-api.kaiascan.io/forge-verify-flatten \
+        // --chain-id 8217 \
+        // 0x583C963CB88FD42409021039B692646617F77b63 src/MyMintBurnOFTAdapterDecimal2.sol:MyMintBurnOFTAdapterDecimal2 --retries 1
+
+    // forge verify-contract --verifier-url https://mainnet-api.kaiascan.io/forge-verify-flatten \
+    // --chain-id 8217 --compiler-version 0.8.28 \
+    // 0x583C963CB88FD42409021039B692646617F77b63 MyMintBurnOFTAdapterDecimal2Flattened.sol:MyMintBurnOFTAdapterDecimal2 --retries 1
+    // *******************
 
     // ** SELF DEPLOYED TESTNET **
     // address public BASE_OAPP = 0x50df5e25AB60e150f753B9444D160a80f0279559;

@@ -5,7 +5,7 @@ import {IMintableBurnable} from "@layerzerolabs/oft-evm/contracts/interfaces/IMi
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ElevatedMinterBurner is IMintableBurnable, Ownable {
-    IMintableBurnable public immutable token;
+    IMintableBurnable public immutable TOKEN;
     mapping(address => bool) public operators;
 
     modifier onlyOperators() {
@@ -13,12 +13,12 @@ contract ElevatedMinterBurner is IMintableBurnable, Ownable {
         _;
     }
 
-    function _onlyOperators() internal {
+    function _onlyOperators() internal view {
         require(operators[msg.sender] || msg.sender == owner(), "Not authorized");
     }
 
     constructor(IMintableBurnable _token, address _owner) Ownable(_owner) {
-        token = _token;
+        TOKEN = _token;
     }
 
     function setOperator(address _operator, bool _status) external onlyOwner {
@@ -26,10 +26,10 @@ contract ElevatedMinterBurner is IMintableBurnable, Ownable {
     }
 
     function burn(address _from, uint256 _amount) external override onlyOperators returns (bool) {
-        return token.burn(_from, _amount);
+        return TOKEN.burn(_from, _amount);
     }
 
     function mint(address _to, uint256 _amount) external override onlyOperators returns (bool) {
-        return token.mint(_to, _amount);
+        return TOKEN.mint(_to, _amount);
     }
 }
