@@ -15,7 +15,7 @@ contract SendOFT is Script, Helper {
     using OptionsBuilder for bytes;
 
     function setUp() public {
-        vm.createSelectFork(vm.rpcUrl("base_mainnet"));
+        vm.createSelectFork(vm.rpcUrl("kaia_mainnet"));
     }
 
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
@@ -27,14 +27,14 @@ contract SendOFT is Script, Helper {
         address toAddress = vm.envAddress("PUBLIC_KEY");
 
         // *********FILL THIS*********
-        address oftAddress = BASE_OAPP; // src
-        address TOKEN = BASE_IDRX;
+        address oftAddress = KAIA_OAPP; // src
+        address TOKEN = KAIA_IDRX;
         uint256 amount = 1_000; // amount to send
         uint256 tokensToSend = amount * 10 ** IERC20Metadata(TOKEN).decimals(); // src
         uint256 privateKey = vm.envUint("PRIVATE_KEY");
         //*******
         //** DESTINATION
-        uint32 dstEid = KAIA_EID; // dst
+        uint32 dstEid = BASE_EID; // dst
         //*******
         //***************************
 

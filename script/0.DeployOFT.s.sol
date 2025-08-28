@@ -12,11 +12,11 @@ contract DeployOFT is Script, Helper {
     uint256 privateKey = vm.envUint("PRIVATE_KEY");
 
     function run() public {
-        // deployARB();
-        // deployBASE();
-        // deployKAIA();
+        deployARB();
+        deployBASE();
+        deployKAIA();
         // deployPOL();
-        deployBSC();
+        // deployBSC();
     }
 
     function deployARB() public {

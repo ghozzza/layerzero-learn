@@ -36,9 +36,9 @@ contract SetReceiveConfig is Script, Helper {
     function run() external {
         // deployBASE();
         // deployARB();
-        // deployKAIA();
+        deployKAIA();
         // deployPOL();
-        deployBSC();
+        // deployBSC();
     }
 
     function deployBASE() public {

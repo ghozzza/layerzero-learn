@@ -41,9 +41,9 @@ contract SetSendConfig is Script, Helper {
     function run() external {
         // deployBASE();
         // deployARB();
-        // deployKAIA();
-        deployPOL();
-        deployBSC();
+        deployKAIA();
+        // deployPOL();
+        // deployBSC();
     }
 
     function deployBASE() public {
@@ -145,7 +145,7 @@ contract SetSendConfig is Script, Helper {
         /// @dev uint64 internal constant NIL_CONFIRMATIONS = type(uint64).max;
         UlnConfig memory uln;
         uln = UlnConfig({
-            confirmations: 10, // minimum block confirmations required on A before sending to B
+            confirmations: 15, // minimum block confirmations required on A before sending to B
             requiredDVNCount: 1, // number of DVNs required
             optionalDVNCount: type(uint8).max, // optional DVNs count, uint8
             optionalDVNThreshold: 0, // optional DVN threshold

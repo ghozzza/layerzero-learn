@@ -24,6 +24,55 @@ contract Helper {
     // address public BASE_EXECUTOR = 0x8A3D588D9f6AC041476b094f97FF94ec30169d3D;
 
     // address public ARB_EXECUTOR = 0x5Df3a1cEbBD9c8BA7F8dF51Fd632A9aef8308897;
+    // ** SELF DEPLOYED TESTNET **
+    // address public BASE_OAPP = 0x50df5e25AB60e150f753B9444D160a80f0279559;
+    // address public ARB_OAPP = 0xb63c53cab400622Bb1E6aD65E098E7faC7CA7e9d;
+
+    // address public BASE_MINTER_BURNER = 0x9A2FC5f9c7F587752b6224aa86A1b159E19ADA23;
+    // address public ARB_MINTER_BURNER = 0xfBE9993eb6A2DE7631aF90A9C288624A4553b679;
+
+    // address public BASE_OAPP = 0xEA08358cbd061E8F9bC1dd14aEC530d5Ef943198;
+    // address public BASE_MINTER_BURNER = 0x5Be174028c20256068C95b133031BD422FcF2d72;
+
+    // address public ARB_OAPP = 0x2C2E4C8aD8d88663BA8e052c84fB1017224752cF;
+    // address public ARB_MINTER_BURNER = 0xAe27f785Fb2cD6d04c2d3D16B1BD1C21d8B4161a;
+
+    // address public BASE_OAPP = 0x3BC24c85aFE8b53368E69dbB74c1130bf4545FB0;
+    // address public BASE_MINTER_BURNER = 0x466a36D7B83EA1e6CC08548E71D6e4e611929ef3;
+
+    // address public ARB_OAPP = 0x64001099241E7D98d413dF25B8D6a1C196231117;
+    // address public ARB_MINTER_BURNER = 0x88728dFdbd742553DDD005D43D6C8eB19B681118;
+
+    // address public KAIA_OAPP;
+    // address public KAIA_MINTER_BURNER;
+
+    // address public POL_OAPP;
+    // address public POL_MINTER_BURNER;
+
+    // address public BSC_OAPP;
+    // address public BSC_MINTER_BURNER;
+
+    // address public ARB_USDT = 0x9850120Abfa32efc9E345583Bc22A70C07cCC2c9;
+    // address public ARB_IDRX = 0xd4221928D1bA8881560da1a528b8495248c5bE46;
+
+    // address public BASE_USDT = 0x0320aC8A299b3da6469bE3Da9ED6c84D09309418;
+    // address public BASE_IDRX = 0x47E64F8615718d1A3FA34efe7E7b96aA9ac8B7F4;
+
+    // address public ARB_USDT = 0x8aeC29Ff4bd2b9d226F95BF32A2dF2C2908315da;
+    // address public ARB_IDRX = 0xA40Aea01A98e50Cf34A4Ec6fecB79F9fBE8Ae007;
+
+    // address public BASE_USDT = 0x918DB59Ab880Cc3c27d182c813ebE3f400436979;
+    // address public BASE_IDRX = 0xE95642E030b5D27d03dd255cC855a576fBc4f83d;
+
+    // address public KAIA_USDT;
+    // address public KAIA_IDRX;
+
+    // address public POL_USDT;
+    // address public POL_IDRX;
+
+    // address public BSC_USDT;
+    // address public BSC_IDRX;
+    // *******************
     // *******************
 
     // ***** MAINNET *****
@@ -99,63 +148,14 @@ contract Helper {
     address public BSC_MINTER_BURNER = 0xfDb1e60C6Fc710f95483c03F6434984FEB31EABb; // done
     address public KAIA_OAPP = 0x583C963CB88FD42409021039B692646617F77b63;
     address public KAIA_MINTER_BURNER = 0x9c4998ce1633B76a2E89E7D9A72f3e9A19EbC10e; // done
-        // *******************
-        //     forge verify-contract --verifier-url https://mainnet-api.kaiascan.io/forge-verify-flatten \
-        // --chain-id 8217 \
-        // 0x583C963CB88FD42409021039B692646617F77b63 src/MyMintBurnOFTAdapterDecimal2.sol:MyMintBurnOFTAdapterDecimal2 --retries 1
+    // *******************
+
+    // forge verify-contract --verifier-url https://mainnet-api.kaiascan.io/forge-verify-flatten \
+    // --chain-id 8217 \
+    // 0x583C963CB88FD42409021039B692646617F77b63 src/MyMintBurnOFTAdapterDecimal2.sol:MyMintBurnOFTAdapterDecimal2 --retries 1
 
     // forge verify-contract --verifier-url https://mainnet-api.kaiascan.io/forge-verify-flatten \
     // --chain-id 8217 --compiler-version 0.8.28 \
     // 0x583C963CB88FD42409021039B692646617F77b63 MyMintBurnOFTAdapterDecimal2Flattened.sol:MyMintBurnOFTAdapterDecimal2 --retries 1
-    // *******************
-
-    // ** SELF DEPLOYED TESTNET **
-    // address public BASE_OAPP = 0x50df5e25AB60e150f753B9444D160a80f0279559;
-    // address public ARB_OAPP = 0xb63c53cab400622Bb1E6aD65E098E7faC7CA7e9d;
-
-    // address public BASE_MINTER_BURNER = 0x9A2FC5f9c7F587752b6224aa86A1b159E19ADA23;
-    // address public ARB_MINTER_BURNER = 0xfBE9993eb6A2DE7631aF90A9C288624A4553b679;
-
-    // address public BASE_OAPP = 0xEA08358cbd061E8F9bC1dd14aEC530d5Ef943198;
-    // address public BASE_MINTER_BURNER = 0x5Be174028c20256068C95b133031BD422FcF2d72;
-
-    // address public ARB_OAPP = 0x2C2E4C8aD8d88663BA8e052c84fB1017224752cF;
-    // address public ARB_MINTER_BURNER = 0xAe27f785Fb2cD6d04c2d3D16B1BD1C21d8B4161a;
-
-    // address public BASE_OAPP = 0x3BC24c85aFE8b53368E69dbB74c1130bf4545FB0;
-    // address public BASE_MINTER_BURNER = 0x466a36D7B83EA1e6CC08548E71D6e4e611929ef3;
-
-    // address public ARB_OAPP = 0x64001099241E7D98d413dF25B8D6a1C196231117;
-    // address public ARB_MINTER_BURNER = 0x88728dFdbd742553DDD005D43D6C8eB19B681118;
-
-    // address public KAIA_OAPP;
-    // address public KAIA_MINTER_BURNER;
-
-    // address public POL_OAPP;
-    // address public POL_MINTER_BURNER;
-
-    // address public BSC_OAPP;
-    // address public BSC_MINTER_BURNER;
-
-    // address public ARB_USDT = 0x9850120Abfa32efc9E345583Bc22A70C07cCC2c9;
-    // address public ARB_IDRX = 0xd4221928D1bA8881560da1a528b8495248c5bE46;
-
-    // address public BASE_USDT = 0x0320aC8A299b3da6469bE3Da9ED6c84D09309418;
-    // address public BASE_IDRX = 0x47E64F8615718d1A3FA34efe7E7b96aA9ac8B7F4;
-
-    // address public ARB_USDT = 0x8aeC29Ff4bd2b9d226F95BF32A2dF2C2908315da;
-    // address public ARB_IDRX = 0xA40Aea01A98e50Cf34A4Ec6fecB79F9fBE8Ae007;
-
-    // address public BASE_USDT = 0x918DB59Ab880Cc3c27d182c813ebE3f400436979;
-    // address public BASE_IDRX = 0xE95642E030b5D27d03dd255cC855a576fBc4f83d;
-
-    // address public KAIA_USDT;
-    // address public KAIA_IDRX;
-
-    // address public POL_USDT;
-    // address public POL_IDRX;
-
-    // address public BSC_USDT;
-    // address public BSC_IDRX;
     // *******************
 }
